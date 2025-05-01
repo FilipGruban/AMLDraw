@@ -1,0 +1,65 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+        x:Class="AvaloniaApplication3.MainWindow"
+        Title="AvaloniaApplication3">
+    <Grid RowDefinitions="Auto,Auto, *">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+    
+        <Border Grid.Row="0" Background="LightGray" Padding="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />      <!-- Left section -->
+                    <ColumnDefinition Width="Auto" />   <!-- Right section -->
+                    <ColumnDefinition Width="*" />      <!-- Left section -->
+                </Grid.ColumnDefinitions>
+
+                <!-- Left controls -->
+                <StackPanel Orientation="Horizontal" Grid.Column="0" Spacing="20">
+                    <!-- Width slider and label -->
+                    <StackPanel Orientation="Vertical">
+                        <Slider x:Name="widthSlider" Minimum="1" Maximum="5" Width="150" Height="50"/>
+                        <TextBlock Text="{Binding ElementName=widthSlider, Path=Value, StringFormat='Line width: {0:F1}'}"/>
+                    </StackPanel>
+
+                    <!-- Color picker -->
+                    <StackPanel Orientation="Vertical">
+                        <ColorPicker x:Name="ColorPicker"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Right controls -->
+                <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center">
+                    <Button Click="ChangeMode" Tag="square" Margin="10,0,10,0">&#x25A1;</Button>
+                    <Button Click="ChangeMode" Tag="rectangle" Margin="10,0,10,0">&#x25AD;</Button>
+                    <Button Click="ChangeMode" Tag="circle" Margin="10,0,10,0">&#x25CB; </Button>
+                    <Button Click="ChangeMode" Tag="polygon" Margin="10,0,10,0">Polygon</Button>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10">
+                    <Button Click="ALlowBucket" Margin="10,0,10,0">&#x1FAA3;</Button>
+                    <Button Click="AllowEraser" Margin="10,0,10,0">&#8864;</Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Drawing Canvas -->
+        <Canvas Grid.Row="2"
+                Name="Canvas"
+                Background="White"
+                PointerPressed="MousePressed"
+                PointerMoved="MouseDragged"
+                PointerReleased="MouseReleased">
+            <Image Name="Bitmap"/>
+        </Canvas>
+
+        <Canvas Grid.Row="2"
+                Name="PreviewCanvas"
+                IsHitTestVisible="False"/>
+    </Grid>
+    
+</Window>
